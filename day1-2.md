@@ -17,6 +17,19 @@ Hãy ôn lại 3 khái niệm mạng cốt lõi:
 
 Xác thực bằng mật khẩu (Password) là điểm yếu lớn nhất vì dễ bị đoán (Brute-force) hoặc lộ lọt.
 
+```mermaid
+sequenceDiagram
+    participant Laptop as Máy cá nhân<br/>(Lưu Private Key)
+    participant Server as Linux Server<br/>(Lưu Public Key)
+    
+    Laptop->>Server: 1. Yêu cầu kết nối SSH
+    Server-->>Laptop: 2. Gửi một "Challenge" (đoạn mã ngẫu nhiên)
+    Note over Laptop: 3. Dùng Private Key để<br/>giải mã/ký Challenge
+    Laptop->>Server: 4. Gửi lại kết quả đã ký
+    Note over Server: 5. Dùng Public Key để<br/>kiểm tra chữ ký
+    Server-->>Laptop: 6. Khớp! Cho phép đăng nhập (Không cần Password)
+```
+
 **SSH Key** dùng mã hóa bất đối xứng (Asymmetric Cryptography):
 * **Public Key (Ổ khóa)**: Lưu trên Server. Ai xem cũng được, không cần bảo mật.
 * **Private Key (Chìa khóa)**: Lưu trên máy bạn. Cần bảo vệ nghiêm ngặt.

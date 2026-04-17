@@ -32,6 +32,23 @@ Khi SSH vào server hay K8s, bạn chỉ có màn hình dòng lệnh. Hãy coi h
 
 Cơ chế này giống hệt cấu hình ACL trên Firewall hay RBAC. 
 
+```mermaid
+graph TD
+    File[Tài nguyên: File/Directory]
+    U[User - Chủ sở hữu]
+    G[Group - Nhóm]
+    O[Others - User khác]
+    
+    U -- "Quyền r, w, x (vd: 7 = 4+2+1)" --> File
+    G -- "Quyền r, x (vd: 5 = 4+1)" --> File
+    O -- "Quyền r, x (vd: 5 = 4+1)" --> File
+    
+    style File fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff
+    style U fill:#0f172a,stroke:#10b981,color:#fff
+    style G fill:#0f172a,stroke:#8b5cf6,color:#fff
+    style O fill:#0f172a,stroke:#ec4899,color:#fff
+```
+
 Linux chia quyền cho 3 đối tượng:
 1. **u (User)**: Chủ file.
 2. **g (Group)**: Nhóm sở hữu.
